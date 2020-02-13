@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    volumes:
+      - ~/data/vx-profile/mongodb:/data/db
+    networks:
+      - internal
+      - local
+
+  app:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 5000:5000
+    command: npm run dev
+    depends_on:
+      - mongo
+    networks:
+      - internal
+      - local
+
+networks:
+  internal:
+    driver: bridge
+  local:
+    external: true
