@@ -52,6 +52,15 @@ const init = async () => {
     return res.json(response)
   }
 
+  app.get('/', (req, res) => {
+    res.json({
+      status: 'success',
+      data: {
+        message: 'service is up and running'
+      }
+    })
+  })
+
   app.post('/kyc', authVerifyClientMiddleware, authVerifyTokenMiddleware, async (req, res) => {
     const payload = {
       userUid: req.userUid,
