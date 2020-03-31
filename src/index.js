@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const Database = require('./db')
 const Ctl = require('./controllers')
@@ -19,6 +20,7 @@ const init = async () => {
 
   const app = express()
 
+  app.use(cors())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
 
